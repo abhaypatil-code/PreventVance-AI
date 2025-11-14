@@ -13,6 +13,5 @@ from . import (
     dashboard, 
     consultations,
     reports,
-    errors,
-    health,
+    # errors # <-- This module can be added for global API error handling
 )

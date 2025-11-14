@@ -23,8 +23,7 @@ def create_app(config_name='default'):
     if isinstance(origins, str) and origins != '*':
         origins = [o.strip() for o in origins.split(',') if o.strip()]
     cors.init_app(app, resources={r"/api/*": {"origins": origins}})
-    limiter.init_app(app)
-    limiter.enabled = app.config.get('RATELIMIT_ENABLED', True)
+    limiter.init_app(app) # <-- ADDED limiter init
     Migrate(app, db)
     
     # --- Load ML Models ---

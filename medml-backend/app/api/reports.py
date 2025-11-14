@@ -12,12 +12,6 @@ from datetime import datetime
 from .responses import forbidden, bad_request, server_error
 
 class PDF(FPDF):
-    @staticmethod
-    def _sanitize(text):
-        try:
-            return str(text).encode('latin-1', 'replace').decode('latin-1')
-        except Exception:
-            return str(text)
     def __init__(self):
         super().__init__()
         self.set_auto_page_break(auto=True, margin=20)
@@ -25,11 +19,11 @@ class PDF(FPDF):
     
     def header(self):
         # Header with logo and title
-        self.set_font('Helvetica', 'B', 16)
+        self.set_font('Arial', 'B', 16)
         self.set_text_color(37, 99, 235)  # Blue color
         self.cell(0, 12, 'HealthCare System', 0, 1, 'C')
         
-        self.set_font('Helvetica', 'B', 14)
+        self.set_font('Arial', 'B', 14)
         self.set_text_color(0, 0, 0)  # Black
         self.cell(0, 8, 'Patient Health Report', 0, 1, 'C')
         
@@ -40,21 +34,21 @@ class PDF(FPDF):
 
     def footer(self):
         self.set_y(-15)
-        self.set_font('Helvetica', 'I', 8)
+        self.set_font('Arial', 'I', 8)
         self.set_text_color(100, 100, 100)
         self.cell(0, 10, f'Page {self.page_no()} | Generated on {datetime.now().strftime("%Y-%m-%d %H:%M")}', 0, 0, 'C')
     
     def chapter_title(self, title):
-        self.set_font('Helvetica', 'B', 12)
+        self.set_font('Arial', 'B', 12)
         self.set_text_color(37, 99, 235)  # Blue color
         self.cell(0, 10, title, 0, 1, 'L')
         self.ln(2)
     
     def chapter_body(self, data):
-        self.set_font('Helvetica', '', 10)
+        self.set_font('Arial', '', 10)
         for key, val in data.items():
             # Ensure text fits within page width
-            text = self._sanitize(f"{key}: {val}")
+            text = f"{key}: {val}"
             self.multi_cell(0, 5, text, 0, 'L', False)
         self.ln()
         
@@ -68,12 +62,12 @@ class PDF(FPDF):
             self.add_page()
         
         # Table title
-        self.set_font('Helvetica', 'B', 12)
+        self.set_font('Arial', 'B', 12)
         self.cell(0, 8, 'Disease Risk Assessment Scores', 0, 1, 'C')
         self.ln(3)
         
         # Table header
-        self.set_font('Helvetica', 'B', 10)
+        self.set_font('Arial', 'B', 10)
         col_width = self.w / 4.5
         self.cell(col_width, 10, 'Disease', 1, 0, 'C')
         self.cell(col_width, 10, 'Risk Level', 1, 0, 'C')
@@ -81,7 +75,7 @@ class PDF(FPDF):
         self.ln()
         
         # Table data
-        self.set_font('Helvetica', '', 10)
+        self.set_font('Arial', '', 10)
         if risk_data:
             data = [
                 ('Diabetes', risk_data.diabetes_risk_level, risk_data.diabetes_risk_score),
@@ -116,7 +110,7 @@ class PDF(FPDF):
         
     def add_recommendations(self, rec_data):
         """Add lifestyle recommendations with improved formatting."""
-        self.set_font('Helvetica', 'B', 12)
+        self.set_font('Arial', 'B', 12)
         self.set_text_color(37, 99, 235)  # Blue color
         self.cell(0, 8, 'Lifestyle Recommendations', 0, 1, 'L')
         self.ln(3)
@@ -132,11 +126,11 @@ class PDF(FPDF):
             recs = rec_data.get(category.lower(), [])
             if recs:
                 # Category header without emoji icons (to avoid Unicode issues)
-                self.set_font('Helvetica', 'B', 11)
+                self.set_font('Arial', 'B', 11)
                 self.set_text_color(37, 99, 235)  # Blue color
                 self.cell(0, 8, f"{category}", 0, 1, 'L')
                 
-                self.set_font('Helvetica', '', 10)
+                self.set_font('Arial', '', 10)
                 self.set_text_color(0, 0, 0)  # Reset to black
                 
                 for rec in recs:
@@ -153,7 +147,7 @@ class PDF(FPDF):
                         self.set_text_color(0, 0, 0)  # Black
                     
                     # Ensure text fits within page width and handle long text
-                    recommendation_text = self._sanitize(f"- ({disease}) {text}")
+                    recommendation_text = f"- ({disease}) {text}"
                     self.multi_cell(0, 5, recommendation_text, 0, 'L', False)
                     self.set_text_color(0, 0, 0)  # Reset to black
                 
@@ -251,9 +245,8 @@ def download_patient_report(patient_id):
 
         pdf.add_recommendations(recs)
 
-        # Output PDF to bytes (compatible with both PyFPDF and fpdf2)
-        pdf_out = pdf.output(dest='S')
-        pdf_bytes = pdf_out if isinstance(pdf_out, (bytes, bytearray)) else pdf_out.encode('latin-1')
+        # Output PDF to bytes
+        pdf_bytes = pdf.output(dest='S').encode('latin-1')
         buffer = BytesIO(pdf_bytes)
 
         current_app.logger.info(f"Generated PDF report for patient {patient_id}")

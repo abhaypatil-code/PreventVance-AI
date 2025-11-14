@@ -1,6 +1,5 @@
 # HealthCare App/medml-backend/app/config.py
 import os
-import logging
 from datetime import timedelta
 
 # This is the 'app' directory
@@ -11,8 +10,8 @@ BASE_DIR = os.path.abspath(os.path.join(basedir, '..'))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     if not SECRET_KEY:
-        logging.getLogger('medml').warning('SECRET_KEY is not set. Using a temporary dev key.')
-        SECRET_KEY = 'dev-secret-key'
+        print("Warning: SECRET_KEY is not set. Using a temporary dev key.")
+        SECRET_KEY = 'dev-secret-key' # Allow in dev
 
     # Database configuration with robust path handling
     if os.environ.get('DATABASE_URL'):
@@ -44,15 +43,15 @@ class Config:
     
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
     if not JWT_SECRET_KEY:
-        logging.getLogger('medml').warning('JWT_SECRET_KEY is not set. Using a temporary dev key.')
-        JWT_SECRET_KEY = 'dev-jwt-secret-key'
+        print("Warning: JWT_SECRET_KEY is not set. Using a temporary dev key.")
+        JWT_SECRET_KEY = 'dev-jwt-secret-key' # Allow in dev
         
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=int(os.environ.get('JWT_ACCESS_TOKEN_EXPIRES_MIN', 15)))
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=int(os.environ.get('JWT_REFRESH_TOKEN_EXPIRES_DAYS', 30)))
     
     GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
     if not GEMINI_API_KEY:
-        logging.getLogger('medml').warning('GEMINI_API_KEY not set. Recommendation API will be disabled.')
+        print("Warning: GEMINI_API_KEY not set. Recommendation API will fail.")
         
     # --- ADDED: Risk Thresholds from SRD ---
     RISK_THRESHOLDS = {
