@@ -133,7 +133,7 @@ else:
                             handle_admin_login(username, password)
             
             with st.expander("Test Credentials (Admin)"):
-                st.code("Username: admin\nPassword: admin123", language="text")
+                st.code("Username: admin\nPassword: Admin123!", language="text")
         
         # --- Patient Login Form ---
         else:

@@ -21,9 +21,11 @@ ADMIN_CREDENTIALS = {
 }
 
 PATIENT_CREDENTIALS = {
-    "abha_id": "98765432109876",  # Use the test patient created in admin flow
+    "abha_id": "98765432109876",
     "password": "TestPatient123!"
 }
+
+LAST_CREATED_PATIENT_CREDENTIALS: Optional[Dict[str, Any]] = None
 
 class TestSession:
     def __init__(self):
@@ -58,7 +60,8 @@ class TestSession:
     def login_patient(self) -> bool:
         """Login as patient and store token."""
         try:
-            response = self.session.post(f"{BACKEND_URL}/auth/patient/login", json=PATIENT_CREDENTIALS)
+            creds = LAST_CREATED_PATIENT_CREDENTIALS or PATIENT_CREDENTIALS
+            response = self.session.post(f"{BACKEND_URL}/auth/patient/login", json=creds)
             response.raise_for_status()
             data = response.json()
             
@@ -103,9 +106,11 @@ class TestSession:
             response = self.session.post(f"{BACKEND_URL}/patients", json=patient_data)
             response.raise_for_status()
             data = response.json()
-            
+
             patient_id = data.get("patient_id")
             print(f"✅ Test patient created successfully. Patient ID: {patient_id}")
+            global LAST_CREATED_PATIENT_CREDENTIALS
+            LAST_CREATED_PATIENT_CREDENTIALS = {"abha_id": unique_abha_id, "password": patient_data["password"]}
             return patient_id
             
         except Exception as e:
