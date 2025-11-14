@@ -1,9 +1,22 @@
 import streamlit as st
 import requests
 import json
+import os
+DEFAULT_TIMEOUT = int(os.getenv("API_TIMEOUT_SEC", "10"))
 
-# --- FIX: Updated BASE_URL to include /v1 ---
-BASE_URL = "http://127.0.0.1:5000/api/v1"
+def _resolve_base_url():
+    env_url = os.getenv("BACKEND_URL")
+    secret_url = None
+    try:
+        secret_url = st.secrets.get("backend_url")
+    except Exception:
+        secret_url = None
+    return (env_url or secret_url or "http://127.0.0.1:5000/api/v1").rstrip("/")
+
+BASE_URL = _resolve_base_url()
+
+def get_base_url():
+    return BASE_URL
 
 def get_token():
     """Retrieves the auth token from session state."""
@@ -25,7 +38,7 @@ def patient_login(abha_id, password):
         response = requests.post(f"{BASE_URL}/auth/patient/login", json={
             "abha_id": abha_id,
             "password": password
-        })
+        }, timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.ConnectionError:
@@ -45,7 +58,7 @@ def admin_login(username, password):
         response = requests.post(f"{BASE_URL}/auth/admin/login", json={
             "username": username,
             "password": password
-        })
+        }, timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.ConnectionError:
@@ -64,7 +77,7 @@ def admin_login(username, password):
 def get_dashboard_stats():
     """Fetches admin dashboard analytics."""
     try:
-        response = requests.get(f"{BASE_URL}/dashboard/stats", headers=get_auth_headers())
+        response = requests.get(f"{BASE_URL}/dashboard/stats", headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -74,7 +87,7 @@ def get_dashboard_stats():
 def add_patient(data):
     """Adds a new patient (Step 1)."""
     try:
-        response = requests.post(f"{BASE_URL}/patients", json=data, headers=get_auth_headers())
+        response = requests.post(f"{BASE_URL}/patients", json=data, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -102,7 +115,7 @@ def add_patient(data):
 def update_patient(patient_id, data):
     """Updates an existing patient's basic info."""
     try:
-        response = requests.put(f"{BASE_URL}/patients/{patient_id}", json=data, headers=get_auth_headers())
+        response = requests.put(f"{BASE_URL}/patients/{patient_id}", json=data, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -126,7 +139,7 @@ def get_patients(category=None, sort=None):
         params['sort'] = sort.lower().replace(" ", "_")
         
     try:
-        response = requests.get(f"{BASE_URL}/patients", headers=get_auth_headers(), params=params)
+        response = requests.get(f"{BASE_URL}/patients", headers=get_auth_headers(), params=params, timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         data = response.json()
         # Backend may wrap list responses under {"data": [...]} via unified ok()
@@ -143,7 +156,7 @@ def add_assessment(patient_id, assessment_type, data):
     """Adds a new assessment for a patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/assessments/{assessment_type}"
-        response = requests.post(url, json=data, headers=get_auth_headers())
+        response = requests.post(url, json=data, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -154,7 +167,7 @@ def trigger_prediction(patient_id):
     """Triggers the ML prediction pipeline for a patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/predict"
-        response = requests.post(url, headers=get_auth_headers())
+        response = requests.post(url, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -165,7 +178,7 @@ def retry_prediction(patient_id):
     """Retry ML prediction for a patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/predict"
-        response = requests.post(url, headers=get_auth_headers())
+        response = requests.post(url, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -183,7 +196,7 @@ def book_consultation(patient_id, disease, risk_level):
     }
     try:
         url = f"{BASE_URL}/consultations"
-        response = requests.post(url, json=data, headers=get_auth_headers())
+        response = requests.post(url, json=data, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -194,7 +207,7 @@ def add_consultation_notes(patient_id, notes):
     """Adds admin notes for the doctor."""
     try:
         url = f"{BASE_URL}/consultations/notes"
-        response = requests.post(url, json={"patient_id": patient_id, "notes": notes}, headers=get_auth_headers())
+        response = requests.post(url, json={"patient_id": patient_id, "notes": notes}, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -207,7 +220,7 @@ def get_patient_details(patient_id):
     """Fetches all details for a single patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}"
-        response = requests.get(url, headers=get_auth_headers())
+        response = requests.get(url, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -218,7 +231,7 @@ def get_latest_prediction(patient_id):
     """Fetches the latest risk prediction for a patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/predictions/latest"
-        response = requests.get(url, headers=get_auth_headers())
+        response = requests.get(url, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -232,7 +245,7 @@ def get_recommendations(patient_id):
     """Fetches lifestyle recommendations for a patient."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/recommendations"
-        response = requests.get(url, headers=get_auth_headers())
+        response = requests.get(url, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -243,7 +256,7 @@ def get_pdf_report(patient_id, sections):
     """Downloads the patient report as a PDF."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/report/pdf"
-        response = requests.post(url, json={"sections": sections}, headers=get_auth_headers())
+        response = requests.post(url, json={"sections": sections}, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.content
     except requests.exceptions.RequestException as e:
@@ -254,7 +267,7 @@ def share_patient_details(patient_id, sections):
     """Requests a backend-generated share link for selected sections."""
     try:
         url = f"{BASE_URL}/patients/{patient_id}/share"
-        response = requests.post(url, json={"sections": sections}, headers=get_auth_headers())
+        response = requests.post(url, json={"sections": sections}, headers=get_auth_headers(), timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:

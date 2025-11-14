@@ -15,14 +15,15 @@ st.set_page_config(
 apply_light_theme()
 
 def check_backend_status():
-    """Check if the backend server is running."""
     try:
-        response = requests.get("http://127.0.0.1:5000/api/v1/auth/me", timeout=3)
+        base = api_client.get_base_url()
+        url = f"{base}/auth/me"
+        response = requests.get(url, timeout=3)
         return True
     except requests.exceptions.ConnectionError:
         return False
     except:
-        return True # Assume running if connection is not refused
+        return True
 
 # Initialize session state variables
 if "logged_in" not in st.session_state:
