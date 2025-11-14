@@ -1,31 +1,55 @@
-# Healthcare Management System
+# 🩺 PreventVance AI — Leading the Future of Early Health Defense
 
-A comprehensive healthcare management system designed for rural healthcare workers to manage patient diagnostics and care delivery. The system enables early detection and preventive care by identifying individuals at risk of diseases before they become symptomatic.
+![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
+![Kaggle](https://img.shields.io/badge/Datasets-Kaggle-blue?logo=kaggle)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+> **PreventVance AI** is a comprehensive healthcare management system designed for **rural healthcare workers** to manage patient diagnostics and care delivery.  
+> The system enables **early detection and preventive care** by identifying individuals at risk of diseases before they become symptomatic.
+
+---
 
 ## 🎯 Why This Project Matters
 
-**Addressing Healthcare Disparities**: This project tackles the critical healthcare gap in rural and underserved areas where access to specialized medical care is limited. By leveraging machine learning and AI technologies, we enable healthcare workers to identify patients at risk of developing serious conditions like diabetes, heart disease, liver disorders, and mental health issues before they become symptomatic. This proactive approach not only saves lives but also reduces healthcare costs by preventing complications that require expensive treatments. The system democratizes access to advanced diagnostic capabilities, ensuring that quality healthcare is not just a privilege of urban areas but reaches every corner of our communities, ultimately creating a more equitable healthcare system for all.
+**PreventVance AI** tackles healthcare disparities by bringing AI-driven diagnostics to **rural and underserved areas**.  
+Through machine learning and data-driven insights, healthcare workers can proactively identify patients at risk of diseases such as:
 
-## 🎯 System Overview
+- 🩸 **Diabetes**
+- ❤️ **Heart Disease**
+- 🧠 **Mental Health Disorders**
+- 🫀 **Liver Conditions**
 
-**Project Goal:** Address critical gaps in diagnosis and treatment accessibility by enabling early detection and preventive care, particularly in underserved rural areas.
+This project aims to **democratize access** to advanced medical intelligence, ensuring equitable healthcare access for all — not just those in urban centers.
 
-**Target Users:** 
-- Primary: Rural healthcare workers who manage patient diagnostics and care delivery
-- Secondary: Corporate wellness programs seeking employee health monitoring solutions
+---
 
-**Value Proposition:** Bridge the healthcare delivery gap in rural areas by proactively identifying at-risk individuals before conditions become symptomatic. Transform raw health data into actionable insights, enabling preventive interventions and reducing long-term health complications.
+## 🧭 System Overview
+
+**Project Goal:**  
+Address critical gaps in diagnosis and treatment accessibility by enabling early detection and preventive care, particularly in underserved rural areas.
+
+**Target Users:**
+- **Primary:** Rural healthcare workers managing patient diagnostics and care delivery  
+- **Secondary:** Corporate wellness programs seeking employee health monitoring solutions  
+
+**Value Proposition:**  
+Transform raw health data into actionable insights, enabling **preventive interventions** and **reducing long-term health complications**.
+
+---
 
 ## 🚀 Quick Start
 
-### Windows Users (Recommended)
-1. **Double-click `start_system.bat`** in the project root
-2. Wait for both backend and frontend to start
-3. Open browser to: **http://localhost:8501**
-4. Login with admin credentials: `admin` / `Admin123!`
+### 💻 Windows Users (Recommended)
 
-### Manual Setup
-```bash
+1. Double-click **`start_system.bat`** in the project root  
+2. Wait for both backend and frontend to start  
+3. Open browser at: [http://localhost:8501](http://localhost:8501)  
+4. Login with admin credentials:  
+   **Username:** `admin` | **Password:** `Admin123!`
+
+### ⚙️ Manual Setup
+
+
 # Start Backend
 cd medml-backend
 python run.py
@@ -33,383 +57,288 @@ python run.py
 # Start Frontend (new terminal)
 cd medml-frontend
 streamlit run app.py
-```
+✨ Features
+🩺 For Healthcare Workers (Admin)
+Patient registration with ABHA ID integration
 
-## 🚀 Features
+Comprehensive health assessments
 
-### For Healthcare Workers (Admin)
-- **Patient Registration**: Complete patient management with ABHA ID integration
-- **Health Assessments**: Comprehensive assessments for Diabetes, Liver, Heart, and Mental Health
-- **AI-Powered Risk Analysis**: ML models predict disease risk levels (Low/Medium/High)
-- **Consultation Management**: Book teleconsultations and in-person consultations based on risk levels
-- **Analytics Dashboard**: Real-time metrics and risk summaries
-- **Notes Management**: Add symptoms and observations for doctors
+AI-powered risk analysis using ML models
 
-### For Patients
-- **Health Dashboard**: Comprehensive health overview with BMI, risk assessments, and recommendations
-- **Disease-Specific Tabs**: Detailed risk analysis for each disease category
-- **Lifestyle Recommendations**: Personalized guidance based on risk levels
-- **Appointment Tracking**: View upcoming consultations
-- **PDF Reports**: Download comprehensive health reports
-- **Data Sharing**: Share selected health information
+Manage teleconsultations and in-person appointments
 
-### Technical Features
-- **ML Integration**: XGBoost models for disease prediction
-- **AI Recommendations**: Gemini API-powered personalized lifestyle guidance
-- **Secure Authentication**: JWT-based authentication with role-based access control
-- **PDF Generation**: Dynamic report generation with selective sections
-- **Responsive Design**: Works on multiple device types
-- **Real-time Analytics**: Live dashboard metrics
+Analytics Dashboard for real-time metrics
 
-## 🏗️ System Architecture
+Add clinical notes and observations
 
-### Backend (Flask)
-- **RESTful API**: JSON-based communication
-- **Database**: SQLite with SQLAlchemy ORM
-- **Authentication**: JWT tokens with refresh mechanism
-- **ML Models**: Pre-trained XGBoost models for disease prediction
-- **AI Integration**: Google Gemini API for recommendations
+👩‍⚕️ For Patients
+Personalized health dashboard
 
-### Frontend (Streamlit)
-- **Admin Dashboard**: Patient management and analytics
-- **Patient Portal**: Health monitoring and recommendations
-- **Responsive UI**: Modern, intuitive interface
-- **Real-time Updates**: Live data synchronization
+Disease-specific risk analysis
 
-### Database Schema
-- **Users**: Healthcare workers (admins)
-- **Patients**: Patient demographic and health data
-- **Assessments**: Disease-specific health parameters
-- **Risk Predictions**: ML model outputs with risk levels
-- **Recommendations**: AI-generated lifestyle guidance
-- **Consultations**: Appointment management
-- **Notes**: Doctor communication
+AI-driven lifestyle recommendations
 
-## 📋 Prerequisites
+Appointment tracking
 
-- Python 3.8 or higher
-- pip (Python package manager)
-- Git (for cloning the repository)
+Downloadable PDF reports
 
-## 🛠️ Installation & Setup
+Selective data sharing
 
-### Prerequisites
-Before you begin, ensure you have the following installed:
-- **Python 3.8 or higher** ([Download Python](https://www.python.org/downloads/))
-- **pip** (usually comes with Python)
-- **Git** ([Download Git](https://git-scm.com/downloads))
-- **Windows 10/11** (for batch files) or any OS for manual setup
+🧠 Technical Highlights
+ML Integration: Champion models (XGBoost, LightGBM, RF)
 
-### Step 1: Clone the Repository
-```bash
+AI Recommendations: Google Gemini API-powered insights
+
+Secure Authentication: JWT-based, role-based access
+
+Responsive Design: Optimized Streamlit frontend
+
+Real-time Analytics: Live dashboard metrics
+
+🏗️ System Architecture
+🧩 Backend (Flask)
+RESTful JSON APIs
+
+SQLite + SQLAlchemy ORM
+
+JWT Authentication
+
+AI Integration via Gemini API
+
+Pre-trained ML models for each disease category
+
+💡 Frontend (Streamlit)
+Admin & Patient dashboards
+
+Intuitive, responsive UI
+
+Real-time synchronization
+
+🗄️ Database Schema Overview
+Table	Description
+Users	Healthcare workers and admins
+Patients	Demographics and health data
+Assessments	Disease-specific parameters
+Risk Predictions	ML risk outputs
+Recommendations	AI lifestyle suggestions
+Consultations	Appointment details
+Notes	Doctor-patient communication
+
+📋 Prerequisites
+Python 3.8+
+
+pip
+
+Git
+
+Windows 10/11 or compatible OS
+
+🛠️ Installation & Setup
+Step 1: Clone Repository
+bash
+Copy code
 git clone https://github.com/yourusername/HealthCare-App.git
 cd HealthCare-App
-```
-
-### Step 2: Install Dependencies
-
-#### Backend Dependencies
-```bash
+Step 2: Install Dependencies
+bash
+Copy code
+# Backend
 cd medml-backend
 pip install -r requirements.txt
-```
 
-#### Frontend Dependencies
-```bash
+# Frontend
 cd ../medml-frontend
 pip install -r requirements.txt
-```
-
-### Step 3: Initialize Database
-```bash
+Step 3: Initialize Database
+bash
+Copy code
 cd ../medml-backend
 python create_admin.py
-```
-This creates the database and sets up the default admin account.
+Step 4: Start the Application
+Option A (Windows Quick Start):
 
-### Step 4: Start the Application
-
-#### Option A: Quick Start (Windows)
-```bash
+bash
+Copy code
 cd ..
 start_system.bat
-```
+Option B (Manual):
 
-#### Option B: Manual Startup
-**Terminal 1 - Backend:**
-```bash
+bash
+Copy code
 cd medml-backend
 python run.py
-```
-Wait for: `Running on http://127.0.0.1:5000`
+Then:
 
-**Terminal 2 - Frontend:**
-```bash
-cd medml-frontend
+bash
+Copy code
+cd ../medml-frontend
 streamlit run app.py
-```
-Wait for: `You can now view your Streamlit app in your browser.`
+🔑 Default Credentials
+Admin Login
 
-### Step 5: Access the Application
-Open your browser and navigate to: **http://localhost:8501**
+Username: admin
 
-### Step 6: Login
-Use the default credentials:
-- **Admin Username:** `admin`
-- **Admin Password:** `Admin123!`
+Email: admin@healthcare.com
 
-## ⚠️ Troubleshooting Setup Issues
+Password: Admin123!
 
-### Common Setup Problems
+Test Patient
 
-**Backend won't start:**
-```bash
-# Check if port 5000 is available
-netstat -ano | findstr :5000
+ABHA ID: 12345678901234
 
-# Kill process using port 5000 (Windows)
-taskkill /PID <PID_NUMBER> /F
+Password: 12345678901234@Default123
 
-# Reinstall dependencies
-cd medml-backend
-pip install -r requirements.txt --force-reinstall
-```
+📊 Machine Learning Models
+Each disease module uses a champion ML model chosen after extensive evaluation of algorithms (XGBoost, LightGBM, RF, SVM, etc.) on real-world datasets.
 
-**Frontend won't load:**
-```bash
-# Install Streamlit
-pip install streamlit
+Disease	Model	Metric
+Diabetes	XGBoost	High F1-score
+Heart Disease	LightGBM	Best ROC-AUC
+Liver Disease	Random Forest	Balanced Accuracy
+Mental Health	XGBoost	Robust Cross-Validation
 
-# Install frontend dependencies
-cd medml-frontend
-pip install -r requirements.txt
-```
+Risk Levels:
 
-**Database errors:**
-```bash
-# Recreate database
-cd medml-backend
-python create_admin.py
-```
+🟢 Low: 0.0 – 0.34
 
-**Rate limiting errors (429):**
-```bash
-# Clear rate limits
-cd medml-backend
-python clear_rate_limits.py
-```
+🟡 Medium: 0.35 – 0.69
 
-For detailed troubleshooting, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+🔴 High: 0.70 – 1.0
 
-## 🔑 Default Credentials
-
-### Admin Login
-- **Username**: `admin`
-- **Email**: `admin@healthcare.com`
-- **Password**: `Admin123!`
-
-### Test Patient Login
-- **ABHA ID**: `12345678901234`
-- **Password**: `12345678901234@Default123`
-
-### Generate Test Data
-For comprehensive testing with 50+ patients:
-```bash
-cd medml-backend
-python comprehensive_test_data_generator.py
-```
-
-## 📊 ML Models
-
-The system uses pre-trained XGBoost models for disease prediction:
-
-- **Diabetes Model**: Predicts diabetes risk based on glucose, blood pressure, BMI, etc.
-- **Liver Model**: Predicts liver disease risk based on bilirubin levels, enzymes, etc.
-- **Heart Model**: Predicts heart disease risk based on cholesterol, blood pressure, lifestyle factors, etc.
-- **Mental Health Model**: Predicts mental health risk based on PHQ-9, GAD-7 scores, etc.
-
-### Risk Levels
-- **Low Risk**: Preventive care and lifestyle maintenance
-- **Medium Risk**: Enhanced monitoring and teleconsultation
-- **High Risk**: Urgent care and in-person consultation
-
-## 🔧 Configuration
-
-### Environment Variables (Optional)
-```bash
-# Database
+🔧 Configuration
+Environment Variables
+bash
+Copy code
 DATABASE_URL=sqlite:///path/to/database.db
-
-# Security
 SECRET_KEY=your-secret-key
 JWT_SECRET_KEY=your-jwt-secret-key
-
-# AI Integration
 GEMINI_API_KEY=your-gemini-api-key
-
-# CORS
 CORS_ORIGINS=http://localhost:8501,http://127.0.0.1:8501
-```
-
-### Risk Thresholds
-The system uses configurable risk thresholds:
-- Low: 0.0 - 0.34
-- Medium: 0.35 - 0.69
-- High: 0.70 - 1.0
-
-## 🧪 Testing
-
-### Automated Testing
-```bash
-# System-wide tests
+🧪 Testing
+Automated Tests
+bash
+Copy code
 python test_system.py
-
-# Frontend-specific tests
 cd tests
 python streamlit_frontend_checks.py
-```
+Manual Testing
+Refer to run_manual_checks.md for:
 
-### Manual Testing
-Follow comprehensive test cases in `run_manual_checks.md`:
-- Admin login and dashboard access
-- Patient registration and assessment flow
-- ML prediction triggering
-- Patient dashboard and reports
-- Error handling scenarios
+Login flows
 
-### Test Data Generation
-Generate 50+ test patients for intensive testing:
-```bash
+Risk analysis
+
+Consultation management
+
+Error handling
+
+Generate 50+ test patients:
+
+bash
+Copy code
 cd medml-backend
 python comprehensive_test_data_generator.py
-python verify_test_data.py
-```
+🔒 Security Features
+JWT Authentication
 
-## 📱 Usage
+Bcrypt Password Hashing
 
-### For Healthcare Workers
+Role-Based Access Control
 
-1. **Login** with admin credentials
-2. **Add New User** to register patients
-3. **Complete Health Assessments** for all 4 disease categories
-4. **Run Risk Analysis** to get ML predictions
-5. **Book Consultations** based on risk levels
-6. **Add Notes** for doctors
-7. **View Analytics** on the dashboard
+Rate Limiting
 
-### For Patients
+CORS Protection
 
-1. **Login** with ABHA ID and password
-2. **View Health Overview** with risk assessments
-3. **Check Disease-Specific Tabs** for detailed analysis
-4. **Review Lifestyle Recommendations**
-5. **Download PDF Reports**
-6. **Share Health Information**
+Token Revocation
 
-## 🔒 Security Features
+📈 Analytics & Reports
+Admin Dashboard:
 
-- **JWT Authentication**: Secure token-based authentication
-- **Password Hashing**: Bcrypt encryption for passwords
-- **Role-Based Access**: Admin and patient role separation
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **CORS Protection**: Cross-origin resource sharing controls
-- **Token Revocation**: JWT token blacklisting for logout
+Daily patient registrations
 
-## 📈 Analytics & Reporting
+Risk distribution metrics
 
-### Admin Dashboard Metrics
-- Today's registrations
-- Users at risk by disease category
-- Risk level distributions
-- Patient management statistics
+Disease-wise analytics
 
-### Patient Reports
-- Comprehensive health summaries
-- Risk assessment details
-- Lifestyle recommendations
-- Medical history
-- Consultation records
+Patient Reports:
 
-## 🚨 Troubleshooting
+Risk summaries
 
-### Quick Fixes
-```bash
-# Clear rate limits
+Lifestyle guidance
+
+Medical history
+
+Consultation records
+
+🚨 Troubleshooting
+Common fixes:
+
+bash
+Copy code
 cd medml-backend
 python clear_rate_limits.py
-
-# Recreate database
 python create_admin.py
-
-# Check system status
 python test_system.py
-```
+If backend port 5000 is busy:
 
-### Common Issues
-1. **Rate Limiting**: Run `python clear_rate_limits.py`
-2. **Backend Won't Start**: Check port 5000 availability
-3. **Frontend Won't Load**: Ensure backend is running
-4. **ML Models Missing**: Check `models_store/` directory
-5. **Database Errors**: Recreate with `python create_admin.py`
+bash
+Copy code
+netstat -ano | findstr :5000
+taskkill /PID <PID_NUMBER> /F
+For full details, see TROUBLESHOOTING.md.
 
-### Detailed Troubleshooting
-See `TROUBLESHOOTING.md` for comprehensive solutions to:
-- Authentication issues
-- ML prediction failures
-- Database problems
-- API connectivity issues
-- Performance optimization
+🤝 Contributing
+Fork the repo
 
-## 🤝 Contributing
+Create your branch
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
+Make your changes
 
-## 📄 License
+Run tests
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Submit a PR
 
-## 🆘 Support
+📄 License
+This project is licensed under the MIT License.
 
-For support and questions:
-- Check the troubleshooting section
-- Run the test suite to identify issues
-- Review the logs for error details
+swift
+Copy code
+MIT License
 
-## 📚 Documentation
+Copyright (c) 2025
 
-- **Setup Guide**: `HOW_TO_RUN.md` - Complete installation and startup instructions
-- **Troubleshooting**: `TROUBLESHOOTING.md` - Comprehensive problem-solving guide
-- **Backend API**: `BACKEND_DISCOVERY.md` - Complete API documentation
-- **Frontend Setup**: `setup_frontend.md` - Streamlit frontend configuration
-- **Test Cases**: `run_manual_checks.md` - Manual testing procedures
-- **Test Data**: `medml-backend/TEST_DATA_GENERATOR_README.md` - Test data generation
-- **Changelog**: `CHANGELOG_STREAMLIT.md` - Recent changes and improvements
+Permission is hereby granted, free of charge, to any person obtaining a copy...
+📚 Documentation
+🧭 HOW_TO_RUN.md — Setup guide
 
-## 🔮 Future Enhancements
+🧩 BACKEND_DISCOVERY.md — API documentation
 
-- Mobile app development
-- Integration with hospital systems
-- Advanced analytics and reporting
-- Multi-language support
-- Cloud deployment options
-- Real-time notifications
-- Integration with wearable devices
-- Enhanced ML model accuracy
-- Telemedicine integration
-- Patient portal mobile app
+💡 setup_frontend.md — Streamlit configuration
 
-## 📞 Support
+🧪 run_manual_checks.md — Manual tests
 
-For technical support:
-1. Check `TROUBLESHOOTING.md` for common issues
-2. Run `python test_system.py` for system diagnostics
-3. Review logs for detailed error information
-4. Follow manual test cases in `run_manual_checks.md`
+🧮 TEST_DATA_GENERATOR_README.md — Test data generation
 
----
+🔮 Future Enhancements
+Mobile app integration 📱
 
-**Healthcare Management System** - Empowering rural healthcare through technology
+Multi-language support 🌐
+
+Real-time notifications 🔔
+
+Cloud deployment ☁️
+
+Wearable device integration ⌚
+
+Advanced analytics & visualization 📊
+
+📞 Support
+For technical assistance:
+
+Review TROUBLESHOOTING.md
+
+Run python test_system.py
+
+Check system logs
+
+Email support or open a GitHub issue
